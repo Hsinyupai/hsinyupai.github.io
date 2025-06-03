@@ -1,5 +1,6 @@
 const translations = {
     en: {
+        languageDisplay: "EN (English)",
         nav: {
             selectedWorks: "Selected works",
             exhibitions: "Exhibitions",
@@ -14,14 +15,64 @@ const translations = {
         },
         gallery: {
             title: "Selected works",
-            artwork1: "Mountain Landscape in Ink",
-            artwork2: "Traditional Architecture",
-            artwork3: "Misty Mountains",
-            artwork4: "Landscape Study",
+            viewDetails: "View Details",
+            artwork1: {
+                title: "Mountain Landscape in Ink",
+                year: "2023",
+                dimensions: "120 x 180 cm",
+                medium: "Ink and color on paper",
+                description: "A contemplative landscape depicting the misty mountains of Taiwan's central range."
+            },
+            artwork2: {
+                title: "Traditional Architecture",
+                year: "2022",
+                dimensions: "90 x 150 cm",
+                medium: "Ink and color on paper",
+                description: "A detailed study of traditional Taiwanese temple architecture."
+            },
+            artwork3: {
+                title: "Misty Mountains",
+                year: "2023",
+                dimensions: "100 x 160 cm",
+                medium: "Ink and color on paper",
+                description: "Capturing the ethereal beauty of mountain peaks shrouded in mist."
+            },
+            artwork4: {
+                title: "Landscape Study",
+                year: "2022",
+                dimensions: "80 x 120 cm",
+                medium: "Ink and color on paper",
+                description: "A plein air study capturing the essence of Taiwan's natural landscape."
+            },
             inquire: "Inquire about this artwork"
+        },
+        exhibitions: {
+            title: "Exhibitions",
+            exhibition1: {
+                title: "Mountain and Water: A Solo Exhibition",
+                duration: "2024.03.15 - 2024.04.30",
+                location: "Taipei Fine Arts Museum",
+                description: "A comprehensive showcase of recent works exploring the harmony between mountains and water in traditional Chinese landscape painting."
+            },
+            exhibition2: {
+                title: "Tradition Meets Contemporary",
+                duration: "2024.05.10 - 2024.06.20",
+                location: "National Taiwan Museum of Fine Arts",
+                description: "An exhibition bridging classical Chinese painting techniques with contemporary artistic expression."
+            },
+            exhibition3: {
+                title: "The Spirit of Ink",
+                duration: "2024.07.01 - 2024.08.15",
+                location: "Kaohsiung Museum of Fine Arts",
+                description: "A collection of works demonstrating the versatility and spiritual depth of ink painting in modern context."
+            }
         },
         contact: {
             title: "Contact",
+            name: "Name",
+            contactInfo: "Contact Information",
+            message: "Message",
+            send: "Send",
             intro: "For inquiries about artworks or exhibitions, please contact:",
             email: "Email: tsunggenpai@gmail.com",
             studio: "Studio: Taipei, Taiwan"
@@ -32,6 +83,7 @@ const translations = {
         }
     },
     tw: {
+        languageDisplay: "TW (繁體中文)",
         nav: {
             selectedWorks: "精選作品",
             exhibitions: "展覽",
@@ -46,14 +98,64 @@ const translations = {
         },
         gallery: {
             title: "精選作品",
-            artwork1: "水墨山水",
-            artwork2: "傳統建築",
-            artwork3: "雲霧山巒",
-            artwork4: "山水研究",
+            viewDetails: "查看詳情",
+            artwork1: {
+                title: "水墨山水",
+                year: "2023年",
+                dimensions: "120 x 180 公分",
+                medium: "水墨設色紙本",
+                description: "以水墨描繪台灣中央山脈的靈秀之氣。"
+            },
+            artwork2: {
+                title: "傳統建築",
+                year: "2022年",
+                dimensions: "90 x 150 公分",
+                medium: "水墨設色紙本",
+                description: "台灣傳統寺廟建築的細緻描繪。"
+            },
+            artwork3: {
+                title: "雲霧山巒",
+                year: "2023年",
+                dimensions: "100 x 160 公分",
+                medium: "水墨設色紙本",
+                description: "捕捉雲霧繚繞山峰的空靈之美。"
+            },
+            artwork4: {
+                title: "山水寫生",
+                year: "2022年",
+                dimensions: "80 x 120 公分",
+                medium: "水墨設色紙本",
+                description: "戶外寫生，捕捉台灣自然景觀的精髓。"
+            },
             inquire: "詢問此作品"
+        },
+        exhibitions: {
+            title: "展覽",
+            exhibition1: {
+                title: "山水：個展",
+                duration: "2024.03.15 - 2024.04.30",
+                location: "台北市立美術館",
+                description: "展出近期作品，探索傳統中國山水畫中山與水的和諧。"
+            },
+            exhibition2: {
+                title: "傳統與當代的對話",
+                duration: "2024.05.10 - 2024.06.20",
+                location: "國立台灣美術館",
+                description: "結合中國傳統繪畫技法與當代藝術表現的展覽。"
+            },
+            exhibition3: {
+                title: "墨韻",
+                duration: "2024.07.01 - 2024.08.15",
+                location: "高雄市立美術館",
+                description: "展現水墨畫在現代語境中的多樣性和精神深度。"
+            }
         },
         contact: {
             title: "聯絡方式",
+            name: "姓名",
+            contactInfo: "聯絡資訊",
+            message: "訊息",
+            send: "發送",
             intro: "如需詢問作品或展覽相關事宜，請聯繫：",
             email: "電子郵件：tsunggenpai@gmail.com",
             studio: "工作室：台北市"
@@ -64,6 +166,7 @@ const translations = {
         }
     },
     cn: {
+        languageDisplay: "CN (简体中文)",
         nav: {
             selectedWorks: "精选作品",
             exhibitions: "展览",
@@ -78,14 +181,64 @@ const translations = {
         },
         gallery: {
             title: "精选作品",
-            artwork1: "水墨山水",
-            artwork2: "传统建筑",
-            artwork3: "云雾山峦",
-            artwork4: "山水研究",
+            viewDetails: "查看详情",
+            artwork1: {
+                title: "水墨山水",
+                year: "2023年",
+                dimensions: "120 x 180 厘米",
+                medium: "水墨设色纸本",
+                description: "以水墨描绘台湾中央山脉的灵秀之气。"
+            },
+            artwork2: {
+                title: "传统建筑",
+                year: "2022年",
+                dimensions: "90 x 150 厘米",
+                medium: "水墨设色纸本",
+                description: "台湾传统寺庙建筑的细致描绘。"
+            },
+            artwork3: {
+                title: "云雾山峦",
+                year: "2023年",
+                dimensions: "100 x 160 厘米",
+                medium: "水墨设色纸本",
+                description: "捕捉云雾缭绕山峰的空灵之美。"
+            },
+            artwork4: {
+                title: "山水写生",
+                year: "2022年",
+                dimensions: "80 x 120 厘米",
+                medium: "水墨设色纸本",
+                description: "户外写生，捕捉台湾自然景观的精髓。"
+            },
             inquire: "询问此作品"
+        },
+        exhibitions: {
+            title: "展览",
+            exhibition1: {
+                title: "山水：个展",
+                duration: "2024.03.15 - 2024.04.30",
+                location: "台北市立美术馆",
+                description: "展出近期作品，探索传统中国山水画中山与水的和谐。"
+            },
+            exhibition2: {
+                title: "传统与当代的对话",
+                duration: "2024.05.10 - 2024.06.20",
+                location: "国立台湾美术馆",
+                description: "结合中国传统绘画技法与当代艺术表现的展览。"
+            },
+            exhibition3: {
+                title: "墨韵",
+                duration: "2024.07.01 - 2024.08.15",
+                location: "高雄市立美术馆",
+                description: "展现水墨画在现代语境中的多样性和精神深度。"
+            }
         },
         contact: {
             title: "联系方式",
+            name: "姓名",
+            contactInfo: "联系信息",
+            message: "信息",
+            send: "发送",
             intro: "如需询问作品或展览相关事宜，请联系：",
             email: "电子邮件：tsunggenpai@gmail.com",
             studio: "工作室：台北市"
@@ -96,6 +249,7 @@ const translations = {
         }
     },
     jp: {
+        languageDisplay: "JP (日本語)",
         nav: {
             selectedWorks: "代表作品",
             exhibitions: "展覧会",
@@ -110,14 +264,64 @@ const translations = {
         },
         gallery: {
             title: "代表作品",
-            artwork1: "水墨山水",
-            artwork2: "伝統建築",
-            artwork3: "霧の山々",
-            artwork4: "山水研究",
+            viewDetails: "詳細を見る",
+            artwork1: {
+                title: "水墨山水",
+                year: "2023年",
+                dimensions: "120 x 180 cm",
+                medium: "紙本墨画",
+                description: "台湾中央山脈の霊気を水墨で表現。"
+            },
+            artwork2: {
+                title: "伝統建築",
+                year: "2022年",
+                dimensions: "90 x 150 cm",
+                medium: "紙本墨画",
+                description: "台湾の伝統的な寺院建築の細密な描写。"
+            },
+            artwork3: {
+                title: "霧の山々",
+                year: "2023年",
+                dimensions: "100 x 160 cm",
+                medium: "紙本墨画",
+                description: "霧に包まれた山々の幽玄な美しさを表現。"
+            },
+            artwork4: {
+                title: "山水写生",
+                year: "2022年",
+                dimensions: "80 x 120 cm",
+                medium: "紙本墨画",
+                description: "屋外写生で台湾の自然景観の本質を捉える。"
+            },
             inquire: "作品についてのお問い合わせ"
+        },
+        exhibitions: {
+            title: "展覧会",
+            exhibition1: {
+                title: "山水：個展",
+                duration: "2024.03.15 - 2024.04.30",
+                location: "台北市立美術館",
+                description: "伝統的な中国山水画における山と水の調和を探求する近作展。"
+            },
+            exhibition2: {
+                title: "伝統と現代の対話",
+                duration: "2024.05.10 - 2024.06.20",
+                location: "国立台湾美術館",
+                description: "中国の伝統的絵画技法と現代アート表現を融合させた展覧会。"
+            },
+            exhibition3: {
+                title: "墨韻",
+                duration: "2024.07.01 - 2024.08.15",
+                location: "高雄市立美術館",
+                description: "現代における水墨画の多様性と精神性の深さを示す作品群。"
+            }
         },
         contact: {
             title: "お問い合わせ",
+            name: "お名前",
+            contactInfo: "ご連絡先",
+            message: "メッセージ",
+            send: "送信",
             intro: "作品や展覧会に関するお問い合わせは下記までご連絡ください：",
             email: "メール：tsunggenpai@gmail.com",
             studio: "アトリエ：台北市"

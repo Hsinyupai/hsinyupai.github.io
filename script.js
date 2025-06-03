@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update language switcher buttons to show TW as default
     document.querySelectorAll('.language-switch').forEach(switcher => {
         if (!localStorage.getItem('preferredLanguage')) {
-            switcher.textContent = 'TW ▾';
+            switcher.textContent = translations['tw'].languageDisplay;
         }
     });
     
@@ -749,7 +749,7 @@ function setLanguage(lang) {
     
     // Update language switcher text
     document.querySelectorAll('.language-switch').forEach(switcher => {
-        switcher.textContent = lang.toUpperCase() + ' ▾';
+        switcher.textContent = translations[lang].languageDisplay;
     });
     
     // Save language preference only if it's different from the default
