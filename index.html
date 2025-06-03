@@ -124,24 +124,46 @@
 
         <section id="exhibitions" class="exhibitions">
             <h2 class="section-title animate-fade" data-i18n="exhibitions.title">Exhibitions</h2>
-            <div class="exhibitions-grid animate-content">
-                <div class="exhibition-item" data-exhibition="exhibition1">
-                    <img src="images/Exhibition1.jpg" alt="Exhibition 1" loading="lazy">
-                    <div class="exhibition-overlay">
-                        <span class="view-details" data-i18n="exhibitions.viewDetails">View Details</span>
+            <div class="carousel-container exhibitions-carousel animate-content">
+                <button class="carousel-button prev" aria-label="Previous exhibition">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="carousel-slide" data-exhibition="exhibition1">
+                            <img src="images/Exhibition1.jpg" alt="Exhibition 1" loading="lazy">
+                            <div class="exhibition-overlay">
+                                <span class="view-details" data-i18n="exhibitions.viewDetails">View Details</span>
+                            </div>
+                        </div>
+                        <div class="carousel-slide" data-exhibition="exhibition2">
+                            <img src="images/Exhibition2.jpg" alt="Exhibition 2" loading="lazy">
+                            <div class="exhibition-overlay">
+                                <span class="view-details" data-i18n="exhibitions.viewDetails">View Details</span>
+                            </div>
+                        </div>
+                        <div class="carousel-slide" data-exhibition="exhibition3">
+                            <img src="images/Exhibition3.jpg" alt="Exhibition 3" loading="lazy">
+                            <div class="exhibition-overlay">
+                                <span class="view-details" data-i18n="exhibitions.viewDetails">View Details</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="exhibition-item" data-exhibition="exhibition2">
-                    <img src="images/Exhibition2.jpg" alt="Exhibition 2" loading="lazy">
-                    <div class="exhibition-overlay">
-                        <span class="view-details" data-i18n="exhibitions.viewDetails">View Details</span>
-                    </div>
-                </div>
-                <div class="exhibition-item" data-exhibition="exhibition3">
-                    <img src="images/Exhibition3.jpg" alt="Exhibition 3" loading="lazy">
-                    <div class="exhibition-overlay">
-                        <span class="view-details" data-i18n="exhibitions.viewDetails">View Details</span>
-                    </div>
+
+                <button class="carousel-button next" aria-label="Next exhibition">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <div class="carousel-nav">
+                    <button class="carousel-indicator active" data-index="0" aria-label="Go to exhibition 1"></button>
+                    <button class="carousel-indicator" data-index="1" aria-label="Go to exhibition 2"></button>
+                    <button class="carousel-indicator" data-index="2" aria-label="Go to exhibition 3"></button>
                 </div>
             </div>
         </section>

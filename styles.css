@@ -977,81 +977,246 @@ body.modal-open {
 
 /* Exhibitions section */
 .exhibitions {
+    padding: 2rem;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 0 2rem;
-    background-color: #fff;
-    height: 100vh;
-    width: 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    overflow: hidden;
 }
 
-.exhibitions-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+.exhibitions-carousel {
+    position: relative;
     width: 100%;
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0;
+    margin: 0 auto;
+    padding: 0 40px;
 }
 
-.exhibition-item {
-    position: relative;
-    aspect-ratio: 3/4;
+.exhibitions-carousel .carousel-track-container {
     overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
 }
 
-.exhibition-item img {
+.exhibitions-carousel .carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.exhibitions-carousel .carousel-slide {
+    flex: 0 0 calc(33.333% - 14px);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    aspect-ratio: 3/4; /* Match the selected works aspect ratio */
+}
+
+.exhibitions-carousel .carousel-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.exhibition-overlay {
+/* Add hover effects to match selected works */
+.exhibitions-carousel .carousel-track:hover .carousel-slide {
+    opacity: 0.7;
+    transform: scale(0.98);
+}
+
+.exhibitions-carousel .carousel-track .carousel-slide:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.exhibitions-carousel .exhibition-overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.exhibition-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.exhibition-item:hover .exhibition-overlay {
+.exhibitions-carousel .carousel-slide:hover .exhibition-overlay {
     opacity: 1;
 }
 
-.exhibition-item:hover img {
-    transform: scale(1.05);
+.exhibitions-carousel .view-details {
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 4px;
 }
 
-.view-details {
-    color: #fff;
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
-    border: 2px solid #fff;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+@media (max-width: 768px) {
+    .exhibitions {
+        padding: 1rem;
+        min-height: 100vh;
+    }
+
+    .exhibitions-carousel {
+        padding: 0 20px;
+        margin-top: 1rem;
+    }
+
+    .exhibitions-carousel .carousel-slide {
+        flex: 0 0 calc(100% - 20px);
+        margin: 0 10px;
+        aspect-ratio: 4/5; /* Slightly taller on mobile for better visibility */
+    }
+
+    .exhibitions-carousel .carousel-button {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.9);
+    }
+
+    .exhibitions-carousel .carousel-button.prev {
+        left: -5px;
+    }
+
+    .exhibitions-carousel .carousel-button.next {
+        right: -5px;
+    }
+
+    .exhibitions-carousel .carousel-nav {
+        margin-top: 15px;
+    }
+
+    .exhibitions-carousel .carousel-indicator {
+        width: 8px;
+        height: 8px;
+    }
+
+    /* Modal optimizations for mobile */
+    .exhibition-modal .modal-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        flex-direction: column;
+    }
+
+    .exhibition-modal .artwork-image {
+        height: 50vh;
+        min-height: 250px;
+    }
+
+    .exhibition-modal .artwork-details {
+        height: 50vh;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .exhibition-modal .modal-close {
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        padding: 8px;
+    }
+
+    .exhibition-modal .modal-nav {
+        width: 36px;
+        height: 36px;
+    }
+
+    .exhibition-modal .modal-nav.prev {
+        left: 10px;
+    }
+
+    .exhibition-modal .modal-nav.next {
+        right: 10px;
+    }
+
+    .exhibition-modal .artwork-details h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .exhibition-modal .artwork-metadata {
+        margin: 1rem 0;
+        padding-bottom: 1rem;
+    }
+
+    .exhibition-modal .artwork-metadata p {
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .exhibition-modal .artwork-description {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Improve touch targets */
+    .exhibitions-carousel .view-details {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+
+    /* Improve scroll behavior */
+    .exhibition-modal .artwork-details {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .exhibitions-carousel .carousel-slide {
+        flex: 0 0 calc(50% - 20px);
+        margin: 0 10px;
+    }
+
+    .exhibitions-carousel {
+        padding: 0 30px;
+    }
+
+    .exhibition-modal .modal-content {
+        width: 90%;
+        height: 90%;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .exhibition-modal .modal-content {
+        flex-direction: row;
+    }
+
+    .exhibition-modal .artwork-image {
+        width: 60%;
+        height: 100%;
+    }
+
+    .exhibition-modal .artwork-details {
+        width: 40%;
+        height: 100%;
+    }
+}
+
+@media (hover: none) {
+    .exhibitions-carousel .carousel-slide .exhibition-overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.3);
+    }
+
+    .exhibitions-carousel .carousel-track .carousel-slide {
+        transform: none;
+        opacity: 1;
+    }
+
+    .exhibitions-carousel .carousel-track .carousel-slide:hover {
+        transform: none;
+    }
 }
 
 /* Contact Form */

@@ -410,6 +410,147 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize carousel
     carousel.init();
 
+    // Initialize exhibitions carousel
+    const exhibitionsCarousel = {
+        container: document.querySelector('.exhibitions-carousel'),
+        track: document.querySelector('.exhibitions-carousel .carousel-track'),
+        slides: document.querySelectorAll('.exhibitions-carousel .carousel-slide'),
+        prevButton: document.querySelector('.exhibitions-carousel .carousel-button.prev'),
+        nextButton: document.querySelector('.exhibitions-carousel .carousel-button.next'),
+        indicators: document.querySelectorAll('.exhibitions-carousel .carousel-indicator'),
+        currentIndex: 0,
+        slidesToShow: 3,
+        touchStartX: 0,
+        touchEndX: 0,
+        isSwiping: false,
+        
+        init() {
+            if (!this.container) return;
+            
+            // Update slidesToShow based on screen width
+            this.updateSlidesToShow();
+            
+            // Clone slides for infinite scroll effect
+            const slidesToClone = 2;
+            for (let i = 0; i < slidesToClone; i++) {
+                this.slides.forEach(slide => {
+                    const clone = slide.cloneNode(true);
+                    this.track.appendChild(clone);
+                });
+            }
+            
+            // Add event listeners
+            this.prevButton.addEventListener('click', () => this.move('prev'));
+            this.nextButton.addEventListener('click', () => this.move('next'));
+            
+            // Add indicator click events
+            this.indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => this.goToSlide(index));
+            });
+
+            // Enhanced touch support
+            this.container.addEventListener('touchstart', (e) => {
+                this.touchStartX = e.touches[0].clientX;
+                this.isSwiping = true;
+                this.track.style.transition = 'none';
+            }, { passive: true });
+            
+            this.container.addEventListener('touchmove', (e) => {
+                if (!this.isSwiping) return;
+                
+                const currentX = e.touches[0].clientX;
+                const diff = this.touchStartX - currentX;
+                const slideWidth = this.slides[0].offsetWidth;
+                const currentOffset = -(this.currentIndex * (slideWidth + 20));
+                
+                this.track.style.transform = `translateX(${currentOffset - diff}px)`;
+            }, { passive: true });
+            
+            this.container.addEventListener('touchend', (e) => {
+                this.touchEndX = e.changedTouches[0].clientX;
+                this.isSwiping = false;
+                this.track.style.transition = 'transform 0.3s ease-in-out';
+                
+                const diff = this.touchStartX - this.touchEndX;
+                const threshold = 50;
+                
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        this.move('next');
+                    } else {
+                        this.move('prev');
+                    }
+                } else {
+                    // Reset to current position if swipe wasn't strong enough
+                    this.updateSlidePosition();
+                }
+            }, { passive: true });
+
+            // Add resize listener with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    this.updateSlidesToShow();
+                    this.updateSlidePosition();
+                }, 250);
+            });
+
+            // Initial position
+            this.updateSlidePosition();
+        },
+
+        updateSlidesToShow() {
+            const width = window.innerWidth;
+            if (width <= 768) {
+                this.slidesToShow = 1;
+            } else if (width <= 1024) {
+                this.slidesToShow = 2;
+            } else {
+                this.slidesToShow = 3;
+            }
+            
+            // Update slide widths
+            const slideWidth = `calc(${100 / this.slidesToShow}% - ${(this.slidesToShow - 1) * 20 / this.slidesToShow}px)`;
+            this.slides.forEach(slide => {
+                slide.style.flex = `0 0 ${slideWidth}`;
+            });
+        },
+        
+        move(direction) {
+            // Update indicators
+            this.indicators[this.currentIndex].classList.remove('active');
+            
+            if (direction === 'next') {
+                this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+            } else {
+                this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+            }
+            
+            this.indicators[this.currentIndex].classList.add('active');
+            this.updateSlidePosition();
+        },
+        
+        updateSlidePosition() {
+            const slideWidth = this.slides[0].offsetWidth;
+            const gap = 20;
+            const offset = -(this.currentIndex * (slideWidth + gap));
+            this.track.style.transform = `translateX(${offset}px)`;
+        },
+        
+        goToSlide(index) {
+            if (index === this.currentIndex) return;
+            
+            this.indicators[this.currentIndex].classList.remove('active');
+            this.currentIndex = index;
+            this.indicators[this.currentIndex].classList.add('active');
+            this.updateSlidePosition();
+        }
+    };
+
+    // Initialize exhibitions carousel
+    exhibitionsCarousel.init();
+
     // Artwork data
     const artworkData = {
         artwork1: {
@@ -669,9 +810,9 @@ document.addEventListener('DOMContentLoaded', function() {
         },
 
         setupExhibitionClicks() {
-            document.querySelectorAll('.exhibition-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const exhibitionId = item.dataset.exhibition;
+            document.querySelectorAll('.exhibitions-carousel .carousel-slide').forEach(slide => {
+                slide.addEventListener('click', () => {
+                    const exhibitionId = slide.getAttribute('data-exhibition');
                     if (exhibitionId && exhibitionData[exhibitionId]) {
                         this.currentIndex = this.exhibitionIds.indexOf(exhibitionId);
                         this.show(exhibitionId);
@@ -682,11 +823,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         show(exhibitionId) {
             const data = exhibitionData[exhibitionId];
+            const lang = localStorage.getItem('preferredLanguage') || 'en';
             
-            document.getElementById('modal-exhibition-image').src = data.image;
-            document.getElementById('modal-exhibition-title').textContent = data.title;
-            document.getElementById('modal-exhibition-duration').textContent = data.duration;
-            document.getElementById('modal-exhibition-description').textContent = data.description;
+            document.getElementById('modal-exhibition-image').src = `images/${exhibitionId}.jpg`;
+            document.getElementById('modal-exhibition-title').textContent = translations[lang].exhibitions[exhibitionId].title;
+            document.getElementById('modal-exhibition-duration').textContent = translations[lang].exhibitions[exhibitionId].duration;
+            document.getElementById('modal-exhibition-location').textContent = translations[lang].exhibitions[exhibitionId].location;
+            document.getElementById('modal-exhibition-description').textContent = translations[lang].exhibitions[exhibitionId].description;
             
             this.modal.classList.add('active');
             document.body.classList.add('modal-open');
@@ -695,6 +838,18 @@ document.addEventListener('DOMContentLoaded', function() {
         hide() {
             this.modal.classList.remove('active');
             document.body.classList.remove('modal-open');
+        },
+
+        updateLanguage(lang) {
+            if (!this.modal.classList.contains('active')) return;
+            
+            const exhibitionId = this.exhibitionIds[this.currentIndex];
+            if (exhibitionId && translations[lang].exhibitions[exhibitionId]) {
+                document.getElementById('modal-exhibition-title').textContent = translations[lang].exhibitions[exhibitionId].title;
+                document.getElementById('modal-exhibition-duration').textContent = translations[lang].exhibitions[exhibitionId].duration;
+                document.getElementById('modal-exhibition-location').textContent = translations[lang].exhibitions[exhibitionId].location;
+                document.getElementById('modal-exhibition-description').textContent = translations[lang].exhibitions[exhibitionId].description;
+            }
         }
     };
 
@@ -707,6 +862,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.setLanguage = function(lang) {
         originalSetLanguage(lang);
         modal.updateLanguage(lang);
+        exhibitionModal.updateLanguage(lang);
     };
 
     // Contact form submission
