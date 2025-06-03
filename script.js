@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update language switcher buttons to show TW as default
     document.querySelectorAll('.language-switch').forEach(switcher => {
         if (!localStorage.getItem('preferredLanguage')) {
-            switcher.textContent = 'TW ▾';
+            switcher.textContent = translations['tw'].languageDisplay;
         }
     });
     
@@ -749,7 +749,7 @@ function setLanguage(lang) {
     
     // Update language switcher text
     document.querySelectorAll('.language-switch').forEach(switcher => {
-        switcher.textContent = lang.toUpperCase() + ' ▾';
+        switcher.textContent = translations[lang].languageDisplay;
     });
     
     // Save language preference only if it's different from the default
@@ -793,4 +793,47 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             behavior: 'smooth'
         });
     });
-}); 
+});
+
+function updateLanguageDisplay(lang) {
+    const displayFormats = {
+        'en': 'EN (English)',
+        'jp': 'JP (日本語)',
+        'tw': 'TW (繁體中文)',
+        'cn': 'CN (简体中文)'
+    };
+    document.querySelectorAll('.language-switch').forEach(button => {
+        button.textContent = displayFormats[lang];
+    });
+}
+
+function switchLanguage(lang) {
+    const displayFormats = {
+        'en': 'EN (English)',
+        'jp': 'JP (日本語)',
+        'tw': 'TW (繁體中文)',
+        'cn': 'CN (简体中文)'
+    };
+    
+    // Update all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const keys = element.getAttribute('data-i18n').split('.');
+        let value = translations[lang];
+        for (const key of keys) {
+            value = value[key];
+        }
+        if (element.tagName.toLowerCase() === 'input' || element.tagName.toLowerCase() === 'textarea') {
+            element.placeholder = value;
+        } else {
+            element.textContent = value;
+        }
+    });
+
+    // Update language switch button text
+    document.querySelectorAll('.language-switch').forEach(button => {
+        button.textContent = displayFormats[lang];
+    });
+
+    // Store the selected language
+    localStorage.setItem('selectedLanguage', lang);
+} 
